@@ -24,9 +24,11 @@ boolean IsFull(Set S){
 
 /* ********** Operator Dasar Set ********* */
 void Insert(Set *S, infotype Elmt){
-    if (!isMember(S, Elmt)){
-        S->Count += 1;
-        S->Elements[S->Count] == Elmt;
+    if (!isFull(S)){
+        if (!isMember(S, Elmt)){
+            S->Count += 1;
+            S->Elements[S->Count] == Elmt;
+        }
     }
 }
 /* Menambahkan Elmt sebagai elemen Set S. */
@@ -35,12 +37,12 @@ void Insert(Set *S, infotype Elmt){
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
 void Delete(Set *S, infotype Elmt){
-    // Kalo ketemu
+    
     boolean found = false;
     int i = 0;
     int idx;
 
-    while (i <= S->Count && found == false){
+    while (i <= S->Count || found == false){
         if (S->Elements[i] == Elmt){
             found = true;
             idx = i;
@@ -48,12 +50,13 @@ void Delete(Set *S, infotype Elmt){
         i++;
     }
 
-    // geser elemen supaya rata kiri
-    for (i = idx; i < S->Count; i++){
-        S->Elements[i] = S->Elements[i+1];
+    // geser elemen supaya rata kiri kalo elemennya ketemu
+    if (found){
+        for (i = idx; i < S->Count; i++){
+            S->Elements[i] = S->Elements[i+1];
+        }
+        S->Count -= 1;
     }
-
-    S->Count -= 1;
 }
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
@@ -62,9 +65,13 @@ void Delete(Set *S, infotype Elmt){
 
 boolean IsMember(Set S, infotype Elmt){
     boolean found = false;
-    int i = 1;
-    while (i <= S.Count && found == false){
-        if (S.Elements[i] == Elmt) found = true;
+    if (!isEmpty(S)){
+        int i = 1;
+        while (i <= S.Count || found == false){
+            if (S.Elements[i] == Elmt) found = true;
+            i++;
+        }
     }
+    return found;
 }
 /* Mengembalikan true jika Elmt adalah member dari S */
