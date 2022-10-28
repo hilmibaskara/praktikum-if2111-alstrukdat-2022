@@ -1,0 +1,1 @@
+int IsWithinRange(double nilai, double min, double max);

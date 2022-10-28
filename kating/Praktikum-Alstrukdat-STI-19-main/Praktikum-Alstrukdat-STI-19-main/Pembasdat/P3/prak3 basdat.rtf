@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 1.select title,release_year from film order by length desc,title asc limit 10;\
+\
+2.select staff_id,concat(first_name,last_name) from staff where staff_id in (select manager_staff_id from store);\
+\
+3.select store.store_id,count(inventory.film_id) from store join inventory on inventory.store_id=store.store_id group by store.store_id;\
+\
+4.select concat(actor.first_name,actor.last_name) from actor join film_actor join film on actor.actor_id=film_actor.actor_id and film_actor.film_id=film.film_id where film.title=\'91ACADEMY DINOSAUR\'92;\
+\
+5.select film.title from film join language on film.language_id=language.language_id where language.name=\'93English\'94 order by title asc;\
+\
+6.\
+\
+7. select actor.actor_id from actor natural inner join film_actor natural inner join film_category natural inner join category where category.name=\'91Horror\'92 or category.name=\'91Action\'92;\
+\
+8. \
+\'97\'97\'97\'97\'97\'97\'97\'97\
+9. delete from language where language_id not in (select language_id from film);\
+\
+10.update film set title=replace(title,\'92DUCK\'92,\'92CHICKEN\'92) where title like \'91%DUCK%\'92;\
+\
+11.insert into store values(3,3);\
+update staff set store_id=3 where staff_id in (select staff_id from staff group by staff_id having count(active)>25);\
+\
+12. create view customer_account as (select customer_id,concat(first_name,last_name) customer_name,email from customer where active=\'911\'92;\
+\
+13.\
+}

@@ -1,0 +1,14 @@
+1.
+MySQL [test]> CREATE TABLE hello (nama varchar(35) not null,kota varchar(35) not null, gaji int not null,umur int not null);
+2.
+MySQL [test]> insert into hello (nama,kota,gaji,umur) values ('parjo','jakarta',5000000,50),('baejah','semarang',15000000,55),('asep','bandung',0,70),('marni','surabaya',6000000,210),('supratman','jakarta',20000000,40),('trisno','makasar',500000,25),('bayu','tegal',0,7),('bambang','jakarta',2000000,20),('budi','semarang',10000000,35),('parji','bandung',0,10);
+3.
+MySQL [test]> select nama from hello where gaji!=0;
+4.
+MySQL [test]> select a.nama,b.nama from hello as a,hello as b where a.nama=b.nama;
+5.
+MySQL [test]> select nama,kota,gaji from hello where kota='jakarta' or gaji>5000000;
+6.
+MySQL [test]> delete from hello where gaji=0;
+7.
+MySQL [test]> update hello set nama='krisna',kota='bandung',gaji=100000000,umur=70 where nama='trisno';
