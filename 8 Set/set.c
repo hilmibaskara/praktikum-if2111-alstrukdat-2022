@@ -23,55 +23,46 @@ boolean IsFull(Set S){
 }
 
 /* ********** Operator Dasar Set ********* */
-void Insert(Set *S, infotype Elmt){
-    if (!isFull(S)){
-        if (!isMember(S, Elmt)){
-            S->Count += 1;
-            S->Elements[S->Count] == Elmt;
-        }
+void Insert(Set *S, infotype Elmt)
+{
+    if (IsMember(*S, Elmt) == false){
+        
+        S->Elements[S->Count] = Elmt;
+        S->Count += 1;
+        
     }
 }
+
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void Delete(Set *S, infotype Elmt){
-    
-    boolean found = false;
+void Delete(Set *S, infotype Elmt)
+{    
     int i = 0;
-    int idx;
-
-    while (i <= S->Count || found == false){
-        if (S->Elements[i] == Elmt){
-            found = true;
-            idx = i;
-        }
+    while (i < S->Count && S->Elements[i] != Elmt)
+    {
         i++;
     }
-
-    // geser elemen supaya rata kiri kalo elemennya ketemu
-    if (found){
-        for (i = idx; i < S->Count; i++){
-            S->Elements[i] = S->Elements[i+1];
-        }
-        S->Count -= 1;
-    }
+    if (i < S->Count)
+    {
+        S->Elements[i] = S->Elements[S->Count - 1];
+        S->Count--;
+    }   
 }
+
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
 boolean IsMember(Set S, infotype Elmt){
-    boolean found = false;
-    if (!isEmpty(S)){
-        int i = 1;
-        while (i <= S.Count || found == false){
-            if (S.Elements[i] == Elmt) found = true;
-            i++;
-        }
+    int i = 0;
+    while (i < S.Count && S.Elements[i] != Elmt)
+    {
+        i++;
     }
-    return found;
+    return i < S.Count;
 }
 /* Mengembalikan true jika Elmt adalah member dari S */
